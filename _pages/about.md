@@ -4,7 +4,10 @@ title: about
 permalink: /
 subtitle: MEng student at the University of Toronto · Robotics · Planning · Robot Learning
 
-profile: false
+profile:
+  align: right
+  image: azure_profile.svg
+  image_circular: false
 selected_papers: false
 social: false
 
