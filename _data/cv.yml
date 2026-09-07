@@ -2,96 +2,58 @@
   type: map
   contents:
     - name: Full Name
-      value: Albert Einstein
-    - name: Date of Birth
-      value: 14th March 1879
-    - name: Languages
-      value: English, German
+      value: Azure Lin
+    - name: Focus
+      value: Robotics, planning, control, and robot learning
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
+    - title: Master of Engineering (MEng), Mechanical & Industrial Engineering
+      institution: University of Toronto, Toronto, Canada
+      year: 2025 - 2027
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
-      description:
-        - Description 1.
-        - Description 2.
+        - Robotics and autonomous systems.
+        - Research on structured representations and reusable procedural memory for complex robot task planning.
+    - title: Bachelor's degree
+      institution: Xiamen University
+      year: 2020 - 2024
 
-- title: Experience
+- title: Research and Engineering
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: 3D Scene Graphs for Complex Task Planning
+      institution: University of Toronto
+      year: 2026 - present
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+        - Developing structured representations of objects, states, actions, and task procedures for embodied agents.
+        - Studying reusable procedural memory and long-horizon task execution in simulated environments.
+    - title: Robot Motion Planning
+      institution: University of Toronto
+      year: 2026
       description:
-        - Description 1.
-        - Description 2.
-
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
-
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
+        - Implemented and evaluated planning methods for robotic motion under geometric constraints.
+    - title: Mobile Robotics and Perception
+      institution: University of Toronto
+      year: 2026
       description:
+        - Worked on planning, navigation, mapping, and state-estimation problems for autonomous robots.
 
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
-
-- title: Open Source Projects
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
-
-- title: Honors and Awards
-  type: time_table
-  contents:
-    - year: 1921
-      items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
-      items:
-        - Max Planck Medal
-
-- title: Academic Interests
+- title: Research Interests
   type: nested_list
   contents:
-    - title: Topic 1.
+    - title: Robot autonomy
       items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
+        - Task and motion planning
+        - Planning and control
+        - Reinforcement and imitation learning
+    - title: Robot perception and reasoning
       items:
-        - Description 1.
-        - Description 2.
+        - 3D scene graphs and structured world models
+        - Multimodal robot learning
+        - SLAM and state estimation
 
-- title: Other Interests
+- title: Technical Areas
   type: list
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - Python, machine learning, robotics simulation, planning algorithms, optimization, and graph-based representations.
