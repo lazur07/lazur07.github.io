@@ -11,21 +11,21 @@ ninja.data = [{
     },
   },{id: "nav-blog",
           title: "blog",
-          description: "Notes on robotics, planning, and learning.",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/blog/";
           },
         },{id: "nav-projects",
           title: "projects",
-          description: "Selected robotics and research projects.",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
           },
         },{id: "nav-cv",
           title: "cv",
-          description: "Academic background and research interests.",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
