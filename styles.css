@@ -1,13 +1,26 @@
 :root {
+  color-scheme: light dark;
   --blue: #1e3765;
-  --blue-soft: rgba(30, 55, 101, 0.16);
-  --blue-faint: rgba(30, 55, 101, 0.07);
   --ink: #111827;
+  --prose: #303846;
   --muted: #737b88;
   --paper: #fbfcfe;
+  --glow: 251, 252, 254;
   --line: #e8ebef;
   --content: 760px;
   --font: "Nunito", ui-rounded, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blue: #9db4e6;
+    --ink: #e6e9f0;
+    --prose: #c3c9d6;
+    --muted: #8b93a3;
+    --paper: #0e1220;
+    --glow: 14, 18, 32;
+    --line: #232a3b;
+  }
 }
 
 * {
@@ -40,7 +53,7 @@ a {
   min-height: 560px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 46%, rgba(255,255,255,0.96) 0 18%, rgba(251,252,254,0.82) 44%, rgba(248,250,253,0.92) 100%);
+    radial-gradient(circle at 50% 46%, rgba(var(--glow), 0.96) 0 18%, rgba(var(--glow), 0.82) 44%, rgba(var(--glow), 0.92) 100%);
 }
 
 #constellation {
@@ -133,7 +146,7 @@ a {
   letter-spacing: 0.06em;
   text-transform: lowercase;
   white-space: nowrap;
-  text-shadow: 0 0 22px rgba(251, 252, 254, 0.95);
+  text-shadow: 0 0 22px rgba(var(--glow), 0.95);
 }
 
 .sr-only {
@@ -184,7 +197,7 @@ a {
 
 .prose {
   max-width: 700px;
-  color: #303846;
+  color: var(--prose);
   font-size: 17px;
   line-height: 1.75;
 }
@@ -258,7 +271,7 @@ a {
 
 .project p {
   margin: 0;
-  color: #3f4754;
+  color: var(--prose);
   line-height: 1.68;
 }
 
