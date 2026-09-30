@@ -311,3 +311,31 @@ a {
   font-size: 22px;
   font-weight: 400;
 }
+
+/* dark mode: glow */
+
+@media (prefers-color-scheme: dark) {
+  .edge {
+    opacity: 0.2;
+  }
+
+  .edge.contains {
+    opacity: 0.5;
+  }
+
+  .node {
+    filter: drop-shadow(0 0 2px rgba(157, 180, 230, 0.7));
+  }
+
+  .node.content {
+    filter: drop-shadow(0 0 2px rgba(157, 180, 230, 0.85));
+  }
+
+  .node-label {
+    text-shadow: 0 0 8px rgba(157, 180, 230, 0.45);
+  }
+
+  .identity h1 {
+    text-shadow: 0 0 28px rgba(157, 180, 230, 0.35), 0 0 2px rgba(157, 180, 230, 0.4);
+  }
+}
