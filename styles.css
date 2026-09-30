@@ -1,0 +1,300 @@
+:root {
+  --blue: #1e3765;
+  --blue-soft: rgba(30, 55, 101, 0.16);
+  --blue-faint: rgba(30, 55, 101, 0.07);
+  --ink: #111827;
+  --muted: #737b88;
+  --paper: #fbfcfe;
+  --line: #e8ebef;
+  --content: 760px;
+  --font: "Nunito", ui-rounded, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+.landing {
+  overflow: hidden;
+}
+
+.void {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 560px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(255,255,255,0.96) 0 18%, rgba(251,252,254,0.82) 44%, rgba(248,250,253,0.92) 100%);
+}
+
+#constellation {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  user-select: none;
+}
+
+.edge {
+  stroke: var(--blue);
+  stroke-width: 0.65;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.edge.contains {
+  stroke-width: 0.9;
+  opacity: 0.38;
+}
+
+.edge.cites {
+  opacity: 0.07;
+}
+
+.node {
+  fill: var(--blue);
+  opacity: 0.82;
+  cursor: grab;
+}
+
+.node.tiny {
+  opacity: 0.48;
+}
+
+.node.content {
+  opacity: 0.95;
+  cursor: pointer;
+}
+
+.hit {
+  fill: transparent;
+  cursor: pointer;
+}
+
+.node.dragging {
+  cursor: grabbing;
+}
+
+.node-label {
+  fill: var(--blue);
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.node-label.visible,
+.node-label.peek {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.node-label.visible {
+  font-size: 20pt;
+}
+
+.identity {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.identity h1 {
+  margin: 0;
+  color: var(--blue);
+  font-weight: 400;
+  font-size: clamp(50px, 7vw, 86px);
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  white-space: nowrap;
+  text-shadow: 0 0 22px rgba(251, 252, 254, 0.95);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* content pages */
+
+.content-page {
+  min-height: 100vh;
+  background: var(--paper);
+}
+
+.content-shell {
+  width: min(calc(100% - 40px), var(--content));
+  margin: 0 auto;
+  padding: 52px 0 90px;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 72px;
+  color: var(--blue);
+  font-size: 13px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.page-kicker {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+.content-shell h1 {
+  margin: 0 0 48px;
+  font-weight: 400;
+  font-size: clamp(42px, 7vw, 68px);
+  letter-spacing: -0.01em;
+  line-height: 1.04;
+}
+
+.prose {
+  max-width: 700px;
+  color: #303846;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.prose p {
+  margin: 0 0 22px;
+}
+
+.list {
+  border-top: 1px solid var(--line);
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.list-date {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding-top: 4px;
+}
+
+.list-item h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.42;
+  font-weight: 400;
+}
+
+.list-item h2 a {
+  text-decoration: none;
+}
+
+.list-item h2 a:hover {
+  color: var(--blue);
+}
+
+.list-item p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.project {
+  padding: 28px 0 30px;
+  border-top: 1px solid var(--line);
+}
+
+.project:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.project h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.project .meta {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.project p {
+  margin: 0;
+  color: #3f4754;
+  line-height: 1.68;
+}
+
+@media (max-width: 650px) {
+  .void {
+    min-height: 480px;
+  }
+
+  .identity h1 {
+    font-size: clamp(44px, 16vw, 68px);
+  }
+
+  .node-label {
+    font-size: 11px;
+  }
+
+  .node-label.visible {
+    font-size: 22px;
+  }
+
+  .content-shell {
+    padding-top: 32px;
+  }
+
+  .back {
+    margin-bottom: 54px;
+  }
+
+  .list-item {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
+
+.prose h2 {
+  margin: 36px 0 10px;
+  font-size: 22px;
+  font-weight: 400;
+}
