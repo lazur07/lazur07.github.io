@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../site";
+import { buildGraph } from "../lib/graph";
+const graph = await buildGraph();
+---
+<Base title={SITE.name} bodyClass="landing">
+  <main class="void" aria-label={`${SITE.name} academic homepage`}>
+    <svg id="constellation" aria-hidden="true"></svg>
+    <div class="identity"><h1>{SITE.name.toLowerCase()}</h1></div>
+    <nav class="sr-only">
+      {SITE.sections.map((s) => <a href={`/${s.id}/`}>{s.id}</a>)}
+    </nav>
+  </main>
+  <script type="application/json" id="graph" set:html={JSON.stringify(graph)} />
+  <script src="../constellation.ts"></script>
+</Base>

@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import Content from "../../layouts/Content.astro";
+import { stamp } from "../../lib/stamp";
+
+export function getStaticPaths() {
+  return [{ params: { section: "blog" } }, { params: { section: "projects" } }];
+}
+const section = Astro.params.section as "blog" | "projects";
+const entries = (await getCollection(section)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const heading = section[0]!.toUpperCase() + section.slice(1);
+---
+<Content title={`${heading}.`} kicker={section}>
+  <section class="list">
+    {entries.map((e) => (
+      <article class="list-item">
+        <div class="list-date">{e.data.meta ?? stamp(e.data.date)}</div>
+        <div>
+          <h2><a href={`/${section}/${e.id}/`}>{e.data.title}</a></h2>
+          <p>{e.data.summary}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+</Content>

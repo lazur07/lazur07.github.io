@@ -1,0 +1,8 @@
+---
+interface Props { srcs: string[]; alts?: string[]; caption?: string }
+const { srcs, alts = [], caption } = Astro.props;
+---
+<figure class={srcs.length > 1 ? "figure-row" : undefined}>
+  {srcs.map((src, i) => <img src={src} alt={alts[i] ?? ""} loading="lazy" />)}
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

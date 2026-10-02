@@ -1,0 +1,62 @@
+---
+title: Everything a post can hold
+label: writing kit
+date: 2026-10-02
+summary: A test page exercising every element the blog supports. Delete once the real posts are in.
+cites: [construction-robots-shenzhen]
+---
+import Slider from "../../components/Slider";
+
+Inline math like $\zeta = c / (2\sqrt{km})$ and display math:
+
+$$
+x(t) = 1 - e^{-\zeta\omega_n t}\left(\cos\omega_d t + \frac{\zeta}{\sqrt{1-\zeta^2}}\sin\omega_d t\right),
+\qquad \omega_d = \omega_n\sqrt{1-\zeta^2}
+$$
+
+## Interactive demo
+
+The curve below is rendered by a React component that lives only on this page. Drag the slider.
+
+<Slider client:visible />
+
+## Code
+
+```ts
+const damping = Math.pow(node.damping, dt / 16);
+node.vx *= damping;
+node.vy *= damping;
+```
+
+## Text styles
+
+**Bold**, *italic*, <u>underline</u>, <mark>highlight</mark>, `inline code`, and a [link to the Shenzhen post](/blog/construction-robots-shenzhen/).
+
+> A quote. The floor leveller reduces physical strain. It does not reduce time.
+
+<details>
+  <summary>A toggle: click to expand</summary>
+
+  Hidden content, with its own list:
+
+  - one
+  - two
+</details>
+
+## Embedded element
+
+<iframe
+  src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"
+  title="Embedded video"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="aspect-ratio: 16 / 9"
+></iframe>
+
+## Images
+
+<Figure srcs={["/img/shenzhen/floor-leveller.jpg"]} caption="A single image through the Figure component." />
+
+A plain Markdown image works too:
+
+![Surveying robot](/img/shenzhen/surveying-robot.jpg)

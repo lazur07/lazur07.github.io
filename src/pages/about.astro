@@ -1,0 +1,9 @@
+---
+import { getEntry, render } from "astro:content";
+import Content from "../layouts/Content.astro";
+const about = (await getEntry("about", "index"))!;
+const { Content: Body } = await render(about);
+---
+<Content title={about.data.title} kicker="about">
+  <div class="prose"><Body /></div>
+</Content>

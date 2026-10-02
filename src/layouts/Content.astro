@@ -1,0 +1,15 @@
+---
+import Base from "./Base.astro";
+import { SITE } from "../site";
+interface Props { title: string; kicker: string; back?: { href: string; label: string } }
+const { title, kicker, back = { href: "/", label: SITE.name.toLowerCase() } } = Astro.props;
+---
+<Base title={`${title} · ${SITE.name}`} bodyClass="content-page">
+  <slot name="head" slot="head" />
+  <main class="content-shell">
+    <a class="back" href={back.href}>← {back.label}</a>
+    <p class="page-kicker">{kicker}</p>
+    <h1>{title}</h1>
+    <slot />
+  </main>
+</Base>

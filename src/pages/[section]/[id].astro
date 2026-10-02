@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from "astro:content";
+import Content from "../../layouts/Content.astro";
+import Figure from "../../components/Figure.astro";
+import { stamp } from "../../lib/stamp";
+import "katex/dist/katex.min.css";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const section of ["blog", "projects"] as const) {
+    for (const entry of await getCollection(section)) paths.push({ params: { section, id: entry.id }, props: { entry } });
+  }
+  return paths;
+}
+const { section } = Astro.params;
+const { entry } = Astro.props;
+const { Content: Body } = await render(entry);
+---
+<Content title={entry.data.title} kicker={entry.data.meta ?? stamp(entry.data.date)} back={{ href: `/${section}/`, label: section }}>
+  <div class="prose"><Body components={{ Figure }} /></div>
+</Content>
