@@ -1,48 +1,18 @@
 ---
-title: Four construction sites, four robots, and why they still need four people
+title: "What construction robots are still missing: the gap between automation and autonomy"
 label: construction robots
 date: 2025-08-10
-summary: "Notes from a smart-construction internship in Shenzhen: AI site safety, BIM + LiDAR, and the three gaps that keep construction robots from working alone."
+summary: Construction sites already have robots, sensors, BIM and AI. Four weeks in Shenzhen showed me why they are still far from autonomy, and where the gap actually is.
 cites: [project-1]
 ---
 
-In July and August 2025 I spent four weeks at Shenzhen Tagen Group as a smart-construction assistant,
-through a Taiwan-youth internship program. The plan was two weeks on site and two weeks of desk research.
-What I saw in the first two weeks changed what I wanted to read about in the last two.
+In July and August 2025 I spent four weeks at Shenzhen Tagen Group as a smart-construction assistant, through a Taiwan-youth internship program. I visited four sites, sat in with the BIM centre, was shown an AI site-safety platform, and joined a research discussion on LiDAR-assisted prefabricated assembly.
 
-## AI site safety
+Everything I would have expected to find was there: robots, sensors, a detailed digital model of the building, computer vision. So the question I left with was not whether the technology exists. It was why, with all of it on site, the robots still cannot be left alone.
 
-The company runs an AI safety platform that fuses daily labour registration, drone patrol imagery and fixed
-cameras. Vision models flag missing helmets, unharnessed work at height and unauthorised entry into danger
-zones, and match each event to a worker identity, crew roster and gate record.
+## One floor-levelling robot, at least four people
 
-<Figure
-  srcs={["/img/shenzhen/safety-dashboard.jpg", "/img/shenzhen/safety-cameras.jpg"]}
-  alts={["Site safety dashboard with live statistics", "Grid of site camera feeds with AI detections"]}
-  caption="The AI safety platform: aggregate dashboard (left) and live camera grid with detections (right)."
-/>
-
-It records violations well. It does nothing about them in the moment. The open question I kept coming back to:
-could wearables and an autonomous platform close that loop, with a drone dispatched for visual confirmation and a
-voice warning at the point of violation?
-
-## BIM and LiDAR for prefabricated metro stations
-
-At the BIM centre I sat in on a research discussion for Shenzhen Metro Line 19: using BIM models together with
-LiDAR point clouds to raise assembly precision for prefabricated station components. Two pieces stood out.
-
-- **Geometric quality inspection.** Scan the component, register it against the BIM geometry, extract features,
-  measure deviation, emit a standard report.
-- **Virtual assembly.** Match key-point coordinates between components with Procrustes analysis to compute the
-  best fitting pose and docking order before anything is lifted.
-
-The step nobody was taking yet: letting a robot read the same BIM model and point cloud, recognise the component
-itself, and adjust its own assembly pose. The data pipeline exists. The autonomy on top of it does not.
-
-## Four sites, four kinds of robot
-
-Across four sites (Hejun Mansion, Baolong biotech base, Tangjia smart manufacturing park, Metro Line 19) I saw
-inspection drones, surveying robots, interior plastering robots and floor-levelling robots in actual use.
+The four sites were a residential development, a biotech campus, an industrial park and a metro station under construction. Between them I saw inspection drones, surveying robots, interior plastering robots and floor-levelling robots in real deployment.
 
 <Figure
   srcs={["/img/shenzhen/floor-leveller.jpg", "/img/shenzhen/surveying-robot.jpg"]}
@@ -50,37 +20,58 @@ inspection drones, surveying robots, interior plastering robots and floor-levell
   caption="Floor-levelling robot (left) and surveying robot (right) on site."
 />
 
-The floor leveller is the honest example. It needs at least four workers: one to mount sensors and set the
-datum, one to mark the levelling boundary, one to guide its path by hand during the pass, and one to patch
-whatever it misses. It reduces physical strain. It does not reduce time.
+The floor leveller is the case I keep coming back to. In the deployment I observed, running it took at least four workers: one mounted the sensors and set the datum, one marked the boundary of the area to be levelled, one guided the machine by hand during the pass, and one went back over whatever it had missed or done badly.
 
-## Three barriers
+The machine automated the pass itself, which is the heaviest part of the job, and it did reduce physical strain. In the deployment I observed, however, the benefit was much clearer in reduced physical strain than in labour or cycle-time savings. The same shape showed up on the other machines: the surveying robot repeats measurements on its own but depends on a person for setup and reference frames; the plastering robot runs a fixed routine but a person defines the work region and inspects the result.
 
-None of this looked like a motion-control problem. The machines move fine. What they lack is on the other side:
+## What those four people are doing
 
-1. **No semantic model of the building.** The robot cannot read the BIM model or the relations between
-   components, so a person has to specify the work region and path for every job, and it cannot move itself
-   from one component to the next.
-2. **No dynamic perception of the site.** Most systems have no vision or depth sensing integrated. They rely on
-   pre-placed markers and manual calibration, and fail as soon as material is moved or a view is blocked.
-3. **No task-level feedback.** Execution is a fixed script. A plastering robot that meets an uneven wall cannot
-   adapt and cannot report how complete the job is; a person fixes it afterwards.
+Look at the four jobs again and they are not four kinds of manual labour. They are three capabilities the robot does not have, supplied by hand.
 
-I asked my mentors to turn the remaining two weeks into desk research on exactly these three gaps, and wrote a
-technical review that combined the site observations with the current literature. It is, in hindsight, the
-reason I now work on task planning that notices when its assumptions no longer match the world.
+1. **Task grounding.** Marking the boundary is telling the robot where the task is and what counts as done. Much of this information already exists in the BIM model; the robot cannot consume it as a task.
+2. **World-state estimation.** Setting the datum and guiding the pass are maintaining, by hand, the robot's picture of where it is and what the surface looks like right now. Most of the systems I saw had no vision or depth sensing integrated; they relied on pre-placed markers and manual calibration, making them vulnerable when materials moved or views became obstructed.
+3. **Closed-loop execution.** Going back over the missed patches is the feedback step. The robot completes a trajectory; it does not know whether it completed the task. A plastering robot that meets an uneven wall cannot tell, cannot adapt, and cannot report how much of the wall is actually finished.
 
-## Side work: Rhino and Revit
+Once the roles are split this way, the question changes. It is no longer "why does this robot need so many people" but "which of these three things could the site already provide, if the robot could consume it".
 
-In the evenings I took two BIM-adjacent courses. For *Design Computing: 3D Modeling in Rhinoceros with Python*
-the final assignment was a Möbius tower, a helical stack of Möbius-strip modules whose radius, width, twist and
-rise are each driven by loops and dictionaries over a 3D surface matrix. For *BIM Fundamentals for Engineers* I
-built grids and levels, stairs and ramps, and extracted section views and schedule data in Revit.
+## The information exists, but in different systems
+
+The company's BIM centre runs a BIM5D workflow that merges models from Revit, Navisworks, Rhino and Grasshopper with schedules, field measurements and inspection records. That is not a 3D drawing. It is a structured representation of the building that already contains component geometry, project information and relationships useful for planning construction work. For task grounding, much of the information is there, at least as designed. Whether it still matches what was built, after site changes that never made it back into the model, is a separate question, and the LiDAR work below exists precisely because it often does not.
+
+On the sensing side, a research discussion on one of the metro station projects was about using LiDAR point clouds together with the BIM model to raise the assembly precision of prefabricated station components: scan a component, register it against the BIM geometry, measure the deviation, and, with Procrustes analysis on matched key points, estimate the assembly pose and docking order before anything is lifted. This was a research topic under discussion, not a deployed system. What it shows is narrower: comparing what *should* exist with what *does* exist is already being worked on for this site, not that the comparison is in use.
+
+The deployed sensing on site is the AI safety platform. It fuses daily labour registration, drone patrol imagery and fixed cameras; vision models flag missing helmets, unharnessed work at height and entry into restricted zones, and tie each event to a worker, a crew and a gate record.
 
 <Figure
-  srcs={["/img/shenzhen/mobius-plan.jpg", "/img/shenzhen/mobius-tower.jpg"]}
-  alts={["Plan view of the Möbius tower modules", "Rendered Möbius tower"]}
-  caption="Möbius tower in Rhino: plan (left) and perspective (right)."
+  srcs={["/img/shenzhen/safety-dashboard.jpg", "/img/shenzhen/safety-cameras.jpg"]}
+  alts={["Site safety dashboard with live statistics", "Grid of site camera feeds with AI detections"]}
+  caption="The AI safety platform: aggregate dashboard (left) and live camera grid with detections (right)."
 />
 
-<Figure srcs={["/img/shenzhen/revit.jpg"]} alts={["Revit model with plan, section and 3D views"]} caption="Revit assignment: plan, section and 3D views of the same model." />
+Perception on this site is mature enough to recognise a specific person doing a specific unsafe thing in real time. Recognising a missing helmet is event classification; knowing which part of a wall is still unfinished needs geometry, semantics and an estimate of how sure the system is. What carries over from the safety platform is the infrastructure (cameras, compute, the habit of linking detections to records), not the perception task itself. What happens after detection is a human process, and for safety that is partly by design. The point is not that perception is solved, but that fairly capable sensing and recognition already exist elsewhere on the same site. They are simply not connected to the robot's own task loop.
+
+Put the two halves against the three capabilities and the pattern is consistent:
+
+| Capability the workers supply | What the site already has | What is missing |
+| --- | --- | --- |
+| Task grounding | BIM and structured project information | Translation from building information to robot tasks |
+| World-state estimation | Cameras and detection models in use for safety events, not task state; LiDAR–BIM registration in research | Online sensing integrated into the robot's state |
+| Closed-loop execution | Human inspection and repair, not machine-readable task feedback | Machine-readable task feedback and autonomous adaptation |
+
+## The gap is the interface, not the motion
+
+The missing pieces were often not absent from the site. They were absent from the robot's interface to the site.
+
+Every system I saw was good at one or two links of the same chain: observe the world, interpret what happened, decide what it means for the task, act. The robots act. The platform observes and interprets. BIM holds the plan. People inspect and repair. Much of that information is not exposed in a form the robot can consume, so a person still stands at each interface. Closing that loop means detecting that something went wrong, choosing a recovery, and doing so under safety constraints while a person may still hold authority over the work.
+
+That is the distinction the internship left me with. Automating an operation means executing a predefined motion well. Completing a task autonomously means knowing what the task is, keeping track of whether the world still matches the plan, and noticing when the result is not yet the result. The sites I saw already had many of the parts needed for the second thing. They sat at the wrong interfaces.
+
+Even with those interfaces built, deployment would still depend on questions I could not answer from these visits: who is responsible when the robot is wrong, what counts as acceptable completion, whether the economics work, and how much authority crews are willing to give the machine.
+
+## What the floor leveller leaves open
+
+At the end of the second week I asked my mentors to turn the remaining two weeks into desk research on these three gaps, and wrote a technical review that set the site observations against the literature on BIM-robot integration, perception in dynamic construction environments, and task understanding and execution feedback for construction robots.
+
+The practical question ("why does this robot still need four people?") had become a general one: how does an autonomous system know when the assumptions behind its plan no longer match the physical world?
+
+Most of what I work on now sits inside that question: structured representations of the environment, task planning over them, monitoring execution, and replanning when the world disagrees. The floor leveller is still the clearest picture I have of what it looks like when those pieces are missing.

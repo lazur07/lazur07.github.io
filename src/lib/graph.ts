@@ -1,4 +1,5 @@
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
+import { entries } from "./entries";
 import { SITE } from "../site";
 
 export type Level = 0 | 1 | 2;
@@ -23,7 +24,7 @@ export async function buildGraph(): Promise<Graph> {
   const edges: Graph["edges"] = [];
 
   for (const section of ["blog", "projects"] as const) {
-    for (const entry of await getCollection(section)) {
+    for (const entry of await entries(section)) {
       const href = `/${section}/${entry.id}/`;
       nodes.push({ id: entry.id, level: 1, parent: section, label: entry.data.label ?? entry.data.title, href });
       for (const h of (await render(entry)).headings.filter((h) => h.depth === 2)) {

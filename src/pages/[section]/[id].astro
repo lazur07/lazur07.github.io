@@ -1,14 +1,14 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import Content from "../../layouts/Content.astro";
 import Figure from "../../components/Figure.astro";
-import { stamp } from "../../lib/stamp";
+import { entries, stamp } from "../../lib/entries";
 import "katex/dist/katex.min.css";
 
 export async function getStaticPaths() {
   const paths = [];
   for (const section of ["blog", "projects"] as const) {
-    for (const entry of await getCollection(section)) paths.push({ params: { section, id: entry.id }, props: { entry } });
+    for (const entry of await entries(section)) paths.push({ params: { section, id: entry.id }, props: { entry } });
   }
   return paths;
 }

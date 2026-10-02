@@ -188,11 +188,11 @@ a {
 }
 
 .content-shell h1 {
-  margin: 0 0 48px;
+  margin: 0 0 36px;
   font-weight: 400;
-  font-size: clamp(42px, 7vw, 68px);
+  font-size: clamp(21px, 3.5vw, 34px);
   letter-spacing: -0.01em;
-  line-height: 1.04;
+  line-height: 1.25;
 }
 
 .prose {
@@ -309,7 +309,7 @@ a {
 .prose h2 {
   margin: 36px 0 10px;
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .prose ul,
@@ -343,7 +343,11 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  align-items: start;
+}
+
+.figure-row img {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
 }
 
 .figure-row figcaption {
@@ -506,4 +510,27 @@ a {
     color: var(--shiki-dark) !important;
     background-color: var(--shiki-dark-bg) !important;
   }
+}
+
+.prose table {
+  width: 100%;
+  margin: 0 0 22px;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.prose th,
+.prose td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.04em;
 }

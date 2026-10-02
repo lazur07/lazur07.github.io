@@ -7,7 +7,8 @@ const entry = z.object({
   summary: z.string(),
   label: z.string().optional(),
   meta: z.string().optional(),
-  cites: z.array(z.string()).default([])
+  cites: z.array(z.string()).default([]),
+  public: z.boolean().default(true)
 });
 
 const collection = (base: string) => defineCollection({ loader: glob({ pattern: "**/*.mdx", base }), schema: entry });
